@@ -1,4 +1,3 @@
-#include "stdafx.h"
 using namespace std;
 
 class fractional{
@@ -12,13 +11,18 @@ public:
 	fractional operator + (const double &k)const;
 	fractional operator + (const fractional &B)const;
 	friend double NOD(double a, double b);
+	void printFractional();
 };
 
 
 int main()
 {
-	double a = 20, b = 30;
-	double k=NOD(a, b);
+	fractional A(1, 2);
+	fractional B(1, 3);
+	fractional C = A + B;
+	A.printFractional();
+	B.printFractional();
+	C.printFractional();
 	getchar();
     return 0;
 }
@@ -28,6 +32,10 @@ fractional fractional::operator + (const double &k)const {
 }
 fractional fractional::operator + (const fractional &B)const {
 	return fractional((Num*B.Den+B.Num*Den)/NOD(Den,B.Den), (Den*B.Den)/NOD(Den,B.Den));
+}
+
+void fractional::printFractional() {
+	printf("%lf/%lf\n", Num, Den);
 }
 
 double NOD(double a, double b) {
