@@ -1,0 +1,44 @@
+#include "stdafx.h"
+using namespace std;
+
+class fractional{
+private:
+	double Num, Den;
+public:
+	fractional(double numerator, double denominator) {
+		Num = numerator;
+		Den = denominator;
+}
+	fractional operator + (const double &k)const;
+	fractional operator + (const fractional &B)const;
+	friend double NOD(double a, double b);
+};
+
+
+int main()
+{
+	double a = 20, b = 30;
+	double k=NOD(a, b);
+	getchar();
+    return 0;
+}
+
+fractional fractional::operator + (const double &k)const {
+	return fractional(Num+k*Den,Den);
+}
+fractional fractional::operator + (const fractional &B)const {
+	return fractional(Num, Den);
+}
+
+double NOD(double a, double b) {
+	if (a == b) 
+		return a;
+
+	if (a > b)
+	{
+		double tmp = a;
+		a = b;
+		b = tmp;
+	}
+	return NOD(a, b - a);
+}
