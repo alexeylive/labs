@@ -1,0 +1,65 @@
+#include "stdafx.h"
+using namespace std;
+
+class complex {
+private:
+	double Re, Im;
+public:
+	complex(double real, double imagine) {
+		Re = real;
+		Im = imagine;
+	}
+	complex operator + (const complex &B)const{
+		return complex((Re + B.Re), (Im + B.Im));
+	}
+	complex operator + (const double &k)const {
+		return complex(Re + k,Im);
+}
+	complex operator - (const complex &B)const{
+		return complex ((Re - B.Re), (Im - B.Im));
+}
+	complex operator - (const double &k)const {
+		return complex(Re - k, Im);
+}
+	complex operator * (const complex &B)const{
+		return complex (((Re*B.Re) - (Im*B.Im)), ((Re*B.Im) - (Im*B.Re)));
+}
+	complex operator * (const double &k)const{
+		return complex(k*Re, k*Im);
+}
+
+	complex operator / (const complex &B)const{
+		return complex((((Re*B.Re) + (Im*B.Im)) / (B.Re*B.Re + B.Im*B.Im)), (((Im*B.Re) + (Re*B.Im)) / (B.Re*B.Re + B.Im*B.Im)));
+
+}
+	complex operator / (const double &k)const {
+		return complex(Re/k, Im/k);
+}
+	complex operator - ()const {
+		return complex(-Re, -Im);
+}
+	bool operator == (const complex &B)const {
+		if ((B.Re == Re) && (B.Im == Im)) {
+			printf("Numbers that are equal to each other");
+			return 0;
+		}
+		else printf("Numbers that are not equal to each other");
+		return 1;
+}
+	void printComplex() {
+		printf("The real part is %lf. \nThe imagine part is %lf. \n", Re, Im);
+}
+
+};
+
+
+
+int main()
+{
+	complex b(2, 2);
+	complex a(4, 4);
+	a = -a;
+	a.printComplex();
+	getchar();
+    return 0;
+}
