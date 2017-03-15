@@ -27,7 +27,7 @@ fractional fractional::operator + (const double &k)const {
 	return fractional(Num+k*Den,Den);
 }
 fractional fractional::operator + (const fractional &B)const {
-	return fractional(Num, Den);
+	return fractional((Num*B.Den+B.Num*Den)/NOD(Den,B.Den), (Den*B.Den)/NOD(Den,B.Den));
 }
 
 double NOD(double a, double b) {
