@@ -1,0 +1,75 @@
+#include <cstring>
+#include <iostream>
+using namespace std;
+
+
+class pstring {
+public:
+	pstring();
+	pstring(const pstring& B);
+	pstring(const char* str);
+	~pstring();
+	pstring& operator = (const pstring& B);
+	pstring& operator +=(const pstring& B);
+	pstring& operator +(const char* str);
+private:
+	int len;			// В len храню число символов + /0
+	char* str;
+};
+
+int main()
+{
+	cout << "Serega is " << endl;
+	getchar();
+    return 0;
+}
+
+
+pstring::pstring():
+	len(1)
+{
+	this->str = new char[len];
+	this->str = "\0";
+}
+
+pstring::pstring(const pstring& B){
+	this->len = B.len;
+	this->str = new char[this->len];
+	memcpy(this->str, B.str, this->len);
+}
+
+pstring::pstring(const char* str) {
+	len = strlen(str) + 1;
+	this->str = new char[len];
+	memcpy(this->str, str, len);
+}
+
+pstring::~pstring() {
+	delete[] str;
+}
+
+pstring& pstring::operator = (const pstring& B) {
+	delete[] this->str;
+	this->len = B.len;
+	this->str = new char[this->len];
+	memcpy(this->str, B.str, this->len);
+	return *this;
+}
+
+pstring& pstring::operator +(const char* str) {
+	int len_str = strlen(str);
+	char* str1 = new char[len_str + this->len];
+	memcpy(str1,this->str,this->len - 1);
+	memcpy(str1+this->len, str,len_str);
+	this->len += len_str;
+	str1[this->len] = '\0';
+	delete[] this->str;
+	this->str = str1;
+	return *this;
+}
+
+
+pstring& pstring::operator +=(const pstring& B) {
+	*this = *this + B.str;
+	return *this;
+}
